@@ -4,6 +4,7 @@ import { PaisSmall } from '../../interfaces/paises.interfaces';
 import { PaisService } from '../../services/pais.service';
 import {switchMap, tap} from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-selector-page',
   templateUrl: './selector-page.component.html',
@@ -14,7 +15,8 @@ export class SelectorPageComponent implements OnInit {
 
   miFormulario : FormGroup = this.fb.group({
     region : ['',Validators.required],
-    pais : ['',Validators.required],
+    pais   : ['',Validators.required],
+    frontera   : ['',Validators.required],
   })
 
 
@@ -40,17 +42,26 @@ export class SelectorPageComponent implements OnInit {
     //         })
     //   })
 
+    //Cuando cambie la region
     this.miFormulario.get('region')?.valueChanges
         .pipe(
-          tap(( _ ) =>{
-            //Esto es para resetear el segundo select
+          tap((_) =>{
+            //Esto es para resetear el segundo select   
             this.miFormulario.get('pais')?.reset('');
           }),
           switchMap(region =>this.paiseservices.getPaisesPorRegion(region))
         )        
         .subscribe(paises => {
+          //console.log(paises);
            this.paises = paises;
         })
+
+
+    //Cuando cambia el pais
+    this.miFormulario.get('pais')?.valueChanges
+    .subscribe(codigo => {
+      console.log(codigo);
+    })
 
   }
 
