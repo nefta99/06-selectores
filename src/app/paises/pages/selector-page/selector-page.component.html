@@ -36,9 +36,9 @@
             <label class="form-label">Fronteras</label>
             <select class="form-control"
                     formControlName="frontera">
-                <option value=""> -- Seleccione el pais fronterizo</option>
-                <!-- <option  *ngFor="let pais of paises"
-                [value]="pais.alpha3Code"> {{pais.name}}</option> -->
+                <option value=""> -- Seleccione el pais frontera</option>
+                <option  *ngFor="let fronterai of fronteras"
+                [value]="fronterai"> {{fronterai}}</option>
             </select>
         </div>
     </div>

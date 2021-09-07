@@ -26,7 +26,7 @@ export class PaisService {
     if(!codigo){
       return of(null)
     }
-    const url =`/alpha/${codigo}`;
+    const url =this.baseUrl+`/alpha/${codigo}`;
     return this.http.get<Pais>(url);
 
   }
